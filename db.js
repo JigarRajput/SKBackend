@@ -8,13 +8,12 @@ try {
   const dbName = process.env.MONGODB_DATABASE;
 
   //making the connection
-  mongoose.connect(url + dbName);
+  mongoose.connect(
+    "mongodb+srv://rajputjigar455:jigar@cluster0.8zvegwv.mongodb.net/?retryWrites=true&w=majority"
+  );
   const con = mongoose.connection;
-
   //checking the connection
   con.on("open", () => {
     console.log("Connection established with database");
   });
-} catch {
-  console.log("Error Generated while making connection to the database");
-}
+} catch (e) {}
