@@ -54,16 +54,19 @@ route.post("/signup", async (req, res) => {
     }
   } else {
     // check if this user already exists
-    const userMobile = NormalPerson.findOne({
+
+    const userMobile = await NormalPerson.findOne({
       mobileNumber: req.body.mobileNumber,
     });
+
+    console.log("userfound is", userMobile, "baat karta hai!");
 
     if (userMobile === null) {
       try {
         const normalUser = new NormalPerson({
           fullName: req.body.fullName,
           mobileNumber: req.body.mobileNumber,
-          password: req.body.hashedPassword,
+          password: hashedPassword,
           country: req.body.country,
           state: req.body.state,
           city: req.body.city,
