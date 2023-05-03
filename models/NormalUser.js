@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const normalPersonSchema = new mongoose.Schema({
   fullName: {
     type: String,
