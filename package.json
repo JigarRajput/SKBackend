@@ -19,6 +19,7 @@
     "mongodb": "^4.16.0",
     "mongoose": "^7.0.4",
     "socket.io": "^4.6.1",
+    "uuid": "^9.0.0",
     "validator": "^13.9.0"
   },
   "devDependencies": {

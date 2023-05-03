@@ -14,10 +14,11 @@ const encodePass = async (pass) => {
 };
 
 route.post("/signup", async (req, res) => {
-  console.log(req.body);
+  // console.log("req body", req.body);
 
   // encode password before storing
   const hashedPassword = await encodePass(req.body.password);
+  console.log("hased password", hashedPassword);
 
   if (req.body.serviceCategory) {
     // if user provides service, move it to servicePeople collection
@@ -42,7 +43,11 @@ route.post("/signup", async (req, res) => {
         // save user to database
         await serviceProviderUser.save();
         // send response
-        res.status(201).send({ message: "User created" });
+        res.status(201).json({
+          message: "User created",
+          success: true,
+          user: serviceProviderUser,
+        });
       } catch (error) {
         res.status(400).send(error);
       }
@@ -75,7 +80,7 @@ route.post("/signup", async (req, res) => {
         // save user to database
         await normalUser.save();
         // send response
-        res.status(201).send({ message: "User created" });
+        res.status(201).json({ message: "User created", user: normalUser });
       } catch (error) {
         res.status(400).send(error);
       }
@@ -115,6 +120,11 @@ route.post("/login", async (req, res) => {
         // if incorrect password
         res.status(401).json({ message: "Incorrect Password", success: false });
       }
+    } else {
+      res.status(404).json({
+        message: "No users found with this mobile number",
+        success: false,
+      });
     }
   } catch (e) {
     // error in making any operation while login

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// mongoose.connect("mongodb://localhost:27017/skdb", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/skdb", { useNewUrlParser: true });
 
 try {
   //all the variables for mongodb connection
@@ -8,9 +8,10 @@ try {
   const dbName = process.env.MONGODB_DATABASE;
 
   //making the connection
-  mongoose.connect(
-    "mongodb+srv://rajputjigar455:jigar@cluster0.8zvegwv.mongodb.net/?retryWrites=true&w=majority"
-  );
+  // mongoose.connect(
+  //   "mongodb+srv://rajputjigar455:jigar@cluster0.8zvegwv.mongodb.net/?retryWrites=true&w=majority",
+  //   { useNewUrlParser: true }
+  // );
   const con = mongoose.connection;
   //checking the connection
   con.on("open", () => {
