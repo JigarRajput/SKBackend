@@ -50,6 +50,7 @@ io.on("connection", (socket) => {
       sender: socket.userId,
       text: message.text,
       timestamp: new Date(),
+      senderDetails: message.senderDetails,
     };
 
     // Find the socket with the specified user ID and emit the message
