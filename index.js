@@ -47,7 +47,8 @@ io.on("connection", (socket) => {
 
     const messageToSend = {
       id: uuidv4(), // generate a unique message ID
-      sender: socket.userId,
+      from: socket.userId,
+      to: message.receiver,
       text: message.text,
       timestamp: new Date(),
       senderDetails: message.senderDetails,
@@ -55,14 +56,14 @@ io.on("connection", (socket) => {
 
     // Find the socket with the specified user ID and emit the message
     const receiverSocket = Object.values(io.sockets.sockets).find(
-      (s) => s.userId === message.receiver
+      (s) => s.userId === message.to
     );
     if (receiverSocket) {
       receiverSocket.emit("message", messageToSend);
     } else {
       // If the receiver is not online, add the message to the queue
-      messageQueue[message.receiver] = messageQueue[message.receiver] || [];
-      messageQueue[message.receiver].push(messageToSend);
+      messageQueue[message.to] = messageQueue[message.to] || [];
+      messageQueue[message.to].push(messageToSend);
     }
   });
 });
