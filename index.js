@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
 
     // Find the socket with the specified user ID and emit the message
     const receiverSocket = Object.values(io.sockets.sockets).find(
-      (s) => s.userId === data.receiver
+      (s) => s.userId === message.receiver
     );
     if (receiverSocket) {
       receiverSocket.emit("message", messageToSend);
