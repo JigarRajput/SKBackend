@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
     const messageToSend = {
       id: uuidv4(), // generate a unique message ID
       from: socket.userId,
-      to: message.receiver,
+      to: message.to,
       text: message.text,
       timestamp: new Date(),
       senderDetails: message.senderDetails,
